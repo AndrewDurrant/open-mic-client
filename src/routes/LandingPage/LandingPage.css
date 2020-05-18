@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.user-options {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.sign-in {
+  background-color: lightgrey;
+  padding: .5rem;
+}
+
+.create-user {
+  background-color: lightgrey;
+  padding: .5rem;
+}
+
+.icon-container {
+  /* height: 30rem; */
+  width: 100%;
+}
+
+.microphone {
+  display: block;
+  margin: 2rem auto;
+  font-size: 20rem;
+  text-align: center;
+}
+
+.app-desc {
+  background-color: darkgrey;
+  padding: 1rem;
+  width: 90%;
+  margin: 7rem auto 2rem;
+}

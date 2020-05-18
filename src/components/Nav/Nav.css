@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main_nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: grey;
+  padding: 1rem;
+}
+
+.nav_links {
+  list-style: none;
+}
