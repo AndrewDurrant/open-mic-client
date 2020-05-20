@@ -6,8 +6,9 @@ export const nullVideo = {
 }
 
 const VideoContext = React.createContext({
-  thing: nullVideo,
-  interactions: [],
+  video: nullVideo,
+  comments: [],
+  ratings: [],
   users: [],
   error: null,
   setError: () => {},
@@ -22,7 +23,7 @@ export default VideoContext
 
 export class VideoProvider extends Component {
   state = {
-    thing: nullVideo,
+    video: nullVideo,
     error: null,
   };
 
@@ -39,33 +40,48 @@ export class VideoProvider extends Component {
     this.setState({ video })
   }
 
-  setInteractions = interactions => {
-    this.setState({ interactions })
+  setComment = comment => {
+    this.setState({ comment })
   }
 
-  clearThing = () => {
+  setRating = rating => {
+    this.setState({ rating })
+  }
+
+  clearVideo = () => {
     this.setVideo(nullVideo)
     this.setInteractions([])
   }
 
-  addInteraction = interaction => {
-    this.setInteractions([
-      ...this.state.interactions,
-      interaction
+  addComment = comment => {
+    this.setComment([
+      ...this.state.comments,
+      comment
+    ])
+  }
+
+  addRating = rating => {
+    this.setRating([
+      ...this.state.ratings,
+      rating
     ])
   }
 
   render() {
     const value = {
       video: this.state.video,
-      interactions: this.state.interactions,
+      comments: this.state.comments,
+      ratings: this.state.ratings,
+      users: this.state.users,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
       setVideo: this.setVideo,
-      setInteractions: this.setInteractions,
+      setComment: this.setComment,
+      setRating: this.setRating,
       clearVideo: this.clearVideo,
-      addInteraction: this.addInteraction,
+      addComment: this.addComment,
+      addRating: this.addRating,
     }
     return (
       <VideoContext.Provider value={value}>

@@ -2,7 +2,7 @@ import config from '../config'
 
 const OpenMicApiService = {
   getVideos() {
-    return fetch(`${config.API_ENDPOINT}/media`, {
+    return fetch(`${config.API_ENDPOINT}/video`, {
       headers: {
       },
     })
@@ -13,7 +13,7 @@ const OpenMicApiService = {
       )
   },
   getVideo(videoId) {
-    return fetch(`${config.API_ENDPOINT}/media/${videoId}`, {
+    return fetch(`${config.API_ENDPOINT}/video/${videoId}`, {
       headers: {
       },
     })
@@ -24,7 +24,18 @@ const OpenMicApiService = {
       )
   },
   getVideoRatings(videoId) {
-    return fetch(`${config.API_ENDPOINT}/media/${videoId}/ratings`, {
+    return fetch(`${config.API_ENDPOINT}/video/${videoId}/ratings`, {
+      headers: {
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+  getVideoComments(videoId) {
+    return fetch(`${config.API_ENDPOINT}/video/${videoId}/comments`, {
       headers: {
       },
     })
