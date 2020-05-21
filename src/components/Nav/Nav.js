@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom'
 import './Nav.css'
 
 export class Nav extends Component {
+  state = {
+    menuOpen: false
+  }
+
+  handleMenuOpen = () => {
+    this.setState({ menuOpen: !this.state.menuOpen })
+  }
+
   handleLogoutClick = () => {
+    console.log('logging out now!')
   }
 
   renderLogoutLink() {
@@ -38,25 +47,31 @@ export class Nav extends Component {
     return (
       <>
         <nav className='main_nav'>
-          <h1>
+          <h1 className='app_logo'>
             <Link to='/'>
               OPEN-MIC
             </Link>
           </h1>
           <span>Hop up on stage and express yourself.</span>
-          <ul className='nav_links'>
+          <i className={`main_nav_menu fas ${this.state.menuOpen ? 'fa-times' : 'fa-bars'}`} onClick={this.handleMenuOpen}></i>
+          <ul className={this.state.menuOpen ? 'nav_links nav_links_open' : 'nav_links'}>
             <li>
-              <Link to='/'>
+              <Link to='/' onClick={this.handleMenuOpen}>
+                Upload video
+              </Link>
+            </li>
+            <li>
+              <Link to='/login' onClick={this.handleMenuOpen}>
                 Log in
               </Link>
             </li>
             <li>
-              <Link to='/'>
+              <Link to='/logout' onClick={this.handleMenuOpen}>
                 Log out
               </Link>
             </li>
             <li>
-              <Link to='/'>
+              <Link to='/register' onClick={this.handleMenuOpen}>
                 Create account
               </Link>
             </li>

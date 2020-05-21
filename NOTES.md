@@ -8,4 +8,15 @@
 
 4- Add CSS to LoginForm from the wireframe
 
-5- 
+
+**Wednesday 5.20.2020**
+Current User Stories:
+1- add form element to VideoCards that contains rating and comment.
+
+2- Work on user login functionality 
+
+3- Work on user adding a video
+
+4- Add local user nav with: most recent(default), favorites, and my Videos
+
+!!!! Use github repo -> thinkful-ed -> blogful-client ->Branch: login-endpoint

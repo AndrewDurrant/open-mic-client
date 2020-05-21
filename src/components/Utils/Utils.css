@@ -26,10 +26,8 @@
 }
 
 .Button {
-  order: 1px solid #aaa;
-  background-color: #eee;
-  font-size: 1.1em;
-  border-radius: 4px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   padding: 8px 12px;
   font-weight: bold;
 }
@@ -44,7 +42,11 @@
   margin-left: 20px;
   margin-right: 20px;
 }
-.Section--list {
-  margin-left: 10px;
-  margin-right: 10px;
+.Section--grid {
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 65rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat( auto-fit, minmax(20rem, 1fr) );
 }

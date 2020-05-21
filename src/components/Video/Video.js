@@ -7,24 +7,20 @@ import './Video.css'
 
 export default class Video extends Component {
   render() {
-    const { video, videoLink } = this.props
+    const { video } = this.props
+    const regex = /(watch\?v=)/gi;
+    const embedLink = video.link.replace(regex, 'embed/')
     
     return (
-      <main>
-        <header>
-          <h2>
-            {video.title}
-          </h2>
-          <Section id="video">
-            <iframe src={videoLink}
-              frameBorder='0'
-              allow='autoplay; encrypted-media'
-              allowFullScreen
-              title='video'
-            />
-          </Section>
-        </header>
-      </main>
+      <div className="video">
+        <iframe src={embedLink}
+          frameBorder='0'
+          allow='autoplay; encrypted-media'
+          allowFullScreen
+          title='video'
+          className='video_frame'
+        />
+      </div>
     )
   }
 }

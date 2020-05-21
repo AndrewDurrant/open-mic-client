@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
-import { Section } from '../../components/Utils/Utils'
+import { Section, Button } from '../../components/Utils/Utils'
 import Video from '../../components/Video/Video'
+import VideoCard from '../../components/VideoCard/VideoCard'
+
 import './UserHomePage.css'
-// import STORE from '../../STORE'
 
 export class UserHomePage extends Component {
   static contextType = VideoListContext
@@ -16,29 +18,45 @@ export class UserHomePage extends Component {
       .catch(this.context.setError)
   }
   
-  renderVideos() {
+  renderVideoCardList() {
     const { videoList = [] } = this.context
     
     return videoList.map(video => {
-      const regex = /(watch\?v=)/gi;
-      const embedLink = video.link.replace(regex, 'embed/')
-      return <Video 
-        key={video.id}
-        video={video}
-        videoLink={embedLink}
-      />
+      return <VideoCard key={video.id} video={video} />
     }
     )
   }
 
   render() {
     const { error } = this.context
+
     return (
-      <Section list className='UserHomePage'>
-        {error
-          ? <p className='red'>There was an error, try again</p>
-          : this.renderVideos()}
-      </Section>
+      <>
+        <nav className='user_nav'>
+          <ul className='user_links'>
+            <li>
+              <Link to='/' className='user_links_active'>
+                Most Recent
+              </Link>
+            </li>
+            <li>
+              <Link to='/'>
+                Favorites
+              </Link>
+            </li>
+            <li>
+              <Link to='/'>
+                My Videos
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <Section grid className='UserHomePage'>
+          {error
+            ? <p className='red'>There was an error, try again</p>
+            : this.renderVideoCardList()}
+        </Section>
+      </>
     )
   }
 }

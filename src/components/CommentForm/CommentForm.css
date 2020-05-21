@@ -1,0 +1,24 @@
+.CommentForm {
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+}
+
+.text_form {
+  display: block;
+  margin: 0 1rem 0 0;
+  flex: 2;
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.basic_btn {
+  display: block;
+  flex: 1;
+  height: 3rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #072337;
+  color: #C6DABF;
+}

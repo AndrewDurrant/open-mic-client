@@ -1,0 +1,28 @@
+.user_links {
+  margin: .5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  padding: 1rem;
+  background-color: #114B5F;
+  border-radius: 10px;
+  height: 4rem;
+}
+
+.user_links a {
+  flex: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #C6DABF;
+  transition: all .3s ease-in-out;
+}
+
+.user_links a:hover {
+  color: #E5F4DC;
+  font-weight: bold;
+}
+
+.user_links_active {
+  font-weight: bold;
+}

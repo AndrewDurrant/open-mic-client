@@ -11,6 +11,8 @@ export function Hyph() {
 }
 
 export function Button({ className, ...props }) {
+  console.log(props);
+  
   return <button className={['Button', className].join(' ')} {...props} />
 }
 
@@ -34,10 +36,10 @@ export function Required({ className, ...props }) {
   )
 }
 
-export function Section({ className, list, ...props }) {
+export function Section({ className, grid, ...props }) {
   const classes = [
     'Section',
-    list && 'Section--list',
+    grid && 'Section--grid',
     className,
   ].filter(Boolean).join(' ')
   return (
