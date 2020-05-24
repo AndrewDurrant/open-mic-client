@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Section } from '../../components/Utils/Utils'
-import { Link } from 'react-router-dom' // This could be used for comments maybe? They use it in blogful for a link to the article. I do not want a link that just goes to this video. I don't think...
 // import { Hyph, NiceDate } from '../../components/Utils/Utils'
 import './Video.css'
 

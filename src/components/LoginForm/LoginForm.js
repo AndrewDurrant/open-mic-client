@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Input } from '../Utils/Utils'
 import './LoginForm.css';
 // import AuthApiService from '../../services/AuthApiService'
-// import TokenService from '../../services/token-service'
+import TokenService from '../../services/token-services';
 
 export default class LoginForm extends Component {
   static defaultProps = {
@@ -10,34 +10,15 @@ export default class LoginForm extends Component {
   }
 
   state = { error: null }
-  //**** CODE FOR AUTHENTICATION ****/
-  
-  // handleSubmitJwtAuth = ev => {
-  //   ev.preventDefault();
-  //   this.setState({ error: null })
-  //   const { user_name, password } = ev.target
 
-  //   AuthApiService.postLogin({
-  //     user_name: user_name.value,
-  //     password: password.value
-  //   })
-  //     .then(res => {
-  //       user_name.value = ''
-  //       password.value = ''
-  //       TokenService.saveAuthToken(res.authToken)
-  //       this.props.onLoginSuccess()
-  //     })
-  //     .catch(res => {
-  //       this.setState({ error: res.error })
-  //     })
-  // }
 
   handleSubmitBasicAuth = ev => {
     ev.preventDefault()
     const { user_name, password } = ev.target
 
-    console.log('login form submitted')
-    console.log({ user_name, password })
+    TokenService.saveAuthToken(
+      TokenService.makeBasicAuthToken(user_name.value, password.value)
+    )
 
     user_name.value = ''
     password.value = ''

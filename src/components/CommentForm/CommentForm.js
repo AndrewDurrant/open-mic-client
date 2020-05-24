@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
-import VideoContext from '../../contexts/VideoContext'
+import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
 import { Button, Textarea } from '../Utils/Utils'
 import './CommentForm.css';
 
 export class CommentForm extends Component {
-  static contextType = VideoContext
+  static contextType = VideoListContext
   
   handleSubmit = ev => {
     ev.preventDefault()
-    const { video } = this.context
-    const { text } = ev.target
-    OpenMicApiService.postComment(video.id, text.value)
-      .then(this.context.addComment)
-      .then(() => {
-        text.value = ''
+    const { text } = ev.target;
+
+    OpenMicApiService.postComment(this.props.videoId, text.value)
+      .then(res => {
+        console.log(res)
       })
-      .catch(this.context.setError)
+      // .then(this.context.addComment)
+      // .then(() => {
+      //   text.value = ''
+      // })
+      .catch(this.context.setError);
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import TokenService from '../../services/token-service'// not built out yet
 import './Nav.css'
+import TokenService from '../../services/token-services';
 
 export class Nav extends Component {
   state = {
@@ -16,30 +16,37 @@ export class Nav extends Component {
     console.log('logging out now!')
   }
 
-  renderLogoutLink() {
+  renderAuthLinks() {
     return (
-      <div className='Nav__logged-in'>
-        <Link
-          onClick={this.handleLogoutClick}
-          to='/'>
-          Logout
-        </Link>
-      </div>
+      <ul className={this.state.menuOpen ? 'nav_links nav_links_open' : 'nav_links'}>
+        <li>
+          <Link to='/' onClick={this.handleMenuOpen}>
+            Upload video
+          </Link>
+        </li>
+        <li>
+          <Link to='/logout' onClick={this.handleMenuOpen}>
+            Log out
+          </Link>
+        </li>
+      </ul>
     )
   }
 
-  renderLoginLink() {
+  renderUnauthLinks() {
     return (
-      <div className='Nav__not-logged-in'>
-        <Link
-          to='/login'>
-          Log in
-        </Link>
-        <Link
-          to='/register'>
-          Register
-        </Link>
-      </div>
+      <ul className={this.state.menuOpen ? 'nav_links nav_links_open' : 'nav_links'}>
+        <li>
+          <Link to='/login' onClick={this.handleMenuOpen}>
+            Log in
+          </Link>
+        </li>
+        <li>
+          <Link to='/register' onClick={this.handleMenuOpen}>
+            Create account
+          </Link>
+        </li>
+      </ul>
     )
   }
 
@@ -54,28 +61,9 @@ export class Nav extends Component {
           </h1>
           <span>Hop up on stage and express yourself.</span>
           <i className={`main_nav_menu fas ${this.state.menuOpen ? 'fa-times' : 'fa-bars'}`} onClick={this.handleMenuOpen}></i>
-          <ul className={this.state.menuOpen ? 'nav_links nav_links_open' : 'nav_links'}>
-            <li>
-              <Link to='/' onClick={this.handleMenuOpen}>
-                Upload video
-              </Link>
-            </li>
-            <li>
-              <Link to='/login' onClick={this.handleMenuOpen}>
-                Log in
-              </Link>
-            </li>
-            <li>
-              <Link to='/logout' onClick={this.handleMenuOpen}>
-                Log out
-              </Link>
-            </li>
-            <li>
-              <Link to='/register' onClick={this.handleMenuOpen}>
-                Create account
-              </Link>
-            </li>
-          </ul>
+          {TokenService.hasAuthToken()
+          ? this.renderAuthLinks()
+          : this.renderUnauthLinks()}
         </nav>
       </>
     )

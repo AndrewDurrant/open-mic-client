@@ -1,4 +1,5 @@
 import config from '../config'
+import TokenService from '../services/token-services'
 
 const OpenMicApiService = {
   getVideos() {
@@ -12,59 +13,17 @@ const OpenMicApiService = {
           : res.json()
       )
   },
-  getVideo(videoId) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}`, {
-      headers: {
-      },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
-  getVideoRatings(videoId) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/ratings`, {
-      headers: {
-      },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
-  getVideoComments(videoId) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/comments`, {
-      headers: {
-      },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
-  getVideoInteractionsById(videoId) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/interactions`, {
-      headers: {
-      },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
+  
   postComment(videoId, text) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}comments`, {
+    return fetch(`${config.API_ENDPOINT}/interactions/comment`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         video_id: videoId,
-        text,
+        comment: text,
       }),
     })
       .then(res =>
@@ -75,10 +34,11 @@ const OpenMicApiService = {
   },
   // need to find out what data type the rating is for this method?
   postRating(videoId, notSureWhatGoesHere) {
-    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/ratings`, {
+    return fetch(`${config.API_ENDPOINT}/interactions/${videoId}/rating`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         video_id: videoId,
@@ -90,6 +50,27 @@ const OpenMicApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
+  },
+
+  // This needs to be created
+  postVideo(videoId, text) {
+    console.log(videoId, text)
+    return fetch(`${config.API_ENDPOINT}/interactions/comment`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        video_id: videoId,
+        text,
+      }),
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
   },
 }
 

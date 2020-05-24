@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
-import { Section, Button } from '../../components/Utils/Utils'
-import Video from '../../components/Video/Video'
+import { Section } from '../../components/Utils/Utils'
 import VideoCard from '../../components/VideoCard/VideoCard'
 
 import './UserHomePage.css'
@@ -29,6 +28,7 @@ export class UserHomePage extends Component {
 
   render() {
     const { error } = this.context
+
     return (
       <>
         <nav className='user_nav'>
