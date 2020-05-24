@@ -2,7 +2,7 @@ import config from '../config'
 
 const OpenMicApiService = {
   getVideos() {
-    return fetch(`${config.API_ENDPOINT}/video`, {
+    return fetch(`${config.API_ENDPOINT}/videos`, {
       headers: {
       },
     })
@@ -13,7 +13,7 @@ const OpenMicApiService = {
       )
   },
   getVideo(videoId) {
-    return fetch(`${config.API_ENDPOINT}/video/${videoId}`, {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}`, {
       headers: {
       },
     })
@@ -24,7 +24,7 @@ const OpenMicApiService = {
       )
   },
   getVideoRatings(videoId) {
-    return fetch(`${config.API_ENDPOINT}/video/${videoId}/ratings`, {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/ratings`, {
       headers: {
       },
     })
@@ -35,7 +35,18 @@ const OpenMicApiService = {
       )
   },
   getVideoComments(videoId) {
-    return fetch(`${config.API_ENDPOINT}/video/${videoId}/comments`, {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/comments`, {
+      headers: {
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+  getVideoInteractionsById(videoId) {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/interactions`, {
       headers: {
       },
     })
@@ -46,7 +57,7 @@ const OpenMicApiService = {
       )
   },
   postComment(videoId, text) {
-    return fetch(`${config.API_ENDPOINT}/video/${videoId}comments`, {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}comments`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -64,7 +75,7 @@ const OpenMicApiService = {
   },
   // need to find out what data type the rating is for this method?
   postRating(videoId, notSureWhatGoesHere) {
-    return fetch(`${config.API_ENDPOINT}/video/${videoId}/ratings`, {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}/ratings`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

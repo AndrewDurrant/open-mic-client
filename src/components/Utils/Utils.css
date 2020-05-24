@@ -1,3 +1,10 @@
+.rate_filled {
+  color: #ecb529;
+}
+
+.rate_empty {
+  color: #38342b ;
+}
 
 .Hyph {
   margin-right: 5px;

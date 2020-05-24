@@ -12,6 +12,23 @@
   color: goldenrod;
 }
 
+.video_comments {
+  width: 75%;
+  margin: 1.5rem auto;
+  background-color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(17, 76, 95, 0.5);
+}
+
+.video_comments p {
+  padding: .5rem 1rem;
+  border-bottom: 1px solid rgba(17, 75, 95, 0.5);
+}
+
+.video_comments p:last-of-type {
+  border: none;
+}
+
 .video_title {
   text-align: left;
   font-weight: 700;

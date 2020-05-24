@@ -5,15 +5,15 @@ export class LandingPage extends Component {
 
   render() {
     return (
-      <main>
+      <main className='landing-page'>
         <section className="user-options">
-          <span className="sign-in">
+          <span className="main-btn">
             <Link
               to='/login'>
               Log In
             </Link>
           </span>
-          <span className="create-user">
+          <span className="main-btn">
             <Link
               to='/register'>
               Create Account
@@ -23,7 +23,7 @@ export class LandingPage extends Component {
         <section className="icon-container">
           <i className="microphone fas fa-microphone-alt icon-4x"></i>
         </section>
-        <span className="create-user">
+        <span className="main-btn">
             <Link
               to='/user-home'>
               Watch Performances

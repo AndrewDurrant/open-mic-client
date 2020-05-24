@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import './RegistrationPage.css';
+
+// components
 import { Section } from '../../components/Utils/Utils'
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
 

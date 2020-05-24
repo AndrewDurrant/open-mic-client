@@ -14,8 +14,8 @@ export class UserHomePage extends Component {
   componentDidMount() {
     this.context.clearError()
     OpenMicApiService.getVideos()
-      .then(this.context.setVideoList)
-      .catch(this.context.setError)
+      .then(res => this.context.setVideoList(res))
+      .catch(err => this.context.setError(err))
   }
   
   renderVideoCardList() {
@@ -29,7 +29,6 @@ export class UserHomePage extends Component {
 
   render() {
     const { error } = this.context
-
     return (
       <>
         <nav className='user_nav'>

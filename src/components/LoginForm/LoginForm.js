@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input } from '../Utils/Utils'
+import './LoginForm.css';
 // import AuthApiService from '../../services/AuthApiService'
 // import TokenService from '../../services/token-service'
 
@@ -53,7 +54,7 @@ export default class LoginForm extends Component {
         <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>
-        <div className='user_name'>
+        <div className='form_input'>
           <label htmlFor='LoginForm__user_name'>
             User name
           </label>
@@ -63,7 +64,7 @@ export default class LoginForm extends Component {
             id='LoginForm__user_name'>
           </Input>
         </div>
-        <div className='password'>
+        <div className='form_input'>
           <label htmlFor='LoginForm__password'>
             Password
           </label>
@@ -74,7 +75,7 @@ export default class LoginForm extends Component {
             id='LoginForm__password'>
           </Input>
         </div>
-        <Button type='submit'>
+        <Button type='submit' className='submit_btn'>
           Login
         </Button>
       </form>

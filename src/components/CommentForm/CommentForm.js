@@ -30,7 +30,6 @@ export class CommentForm extends Component {
           className='text_form'
           aria-label='Type a comment...'
           name='text'
-          id='text'
           cols='30'
           rows='3'
           placeholder='Type a comment..'>

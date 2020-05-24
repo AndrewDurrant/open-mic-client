@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import './RegistrationForm.css';
+
 import { Button, Input, Required } from '../Utils/Utils'
 
 export default class RegistrationForm extends Component {
@@ -32,7 +34,7 @@ export default class RegistrationForm extends Component {
         <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div>
-        <div className='full_name'>
+        <div className='form_input'>
           <label htmlFor='RegistrationForm__full_name'>
             Full name <Required />
           </label>
@@ -43,7 +45,7 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__full_name'>
           </Input>
         </div>
-        <div className='user_name'>
+        <div className='form_input'>
           <label htmlFor='RegistrationForm__user_name'>
             User name <Required />
           </label>
@@ -54,7 +56,7 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__user_name'>
           </Input>
         </div>
-        <div className='password'>
+        <div className='form_input'>
           <label htmlFor='RegistrationForm__password'>
             Password <Required />
           </label>
@@ -65,7 +67,7 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__password'>
           </Input>
         </div>
-        <div className='nick_name'>
+        <div className='form_input'>
           <label htmlFor='RegistrationForm__email'>
             Email
           </label>
@@ -76,7 +78,7 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__email'>
           </Input>
         </div>
-        <Button type='submit'>
+        <Button type='submit' className='submit_btn'>
           Register
         </Button>
       </form>

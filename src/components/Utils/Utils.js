@@ -6,12 +6,22 @@ import './Utils.css'
 //   return formatDate(date, format)
 // }
 
+export function AverageRating(num) {
+  let  stars = [];
+  for (let i = 0; i < num; i++) {
+    stars.push(<i key={stars.length} className="fas fa-microphone-alt icon-4x rate_filled"></i>)
+  }
+  while (stars.length < 4) {
+    stars.push(<i key={stars.length} className="fas fa-microphone-alt icon-4x rate_empty"></i>)
+  }
+  return stars;
+}
+
 export function Hyph() {
   return <span className='Hyph'>{' - '}</span>
 }
 
 export function Button({ className, ...props }) {
-  console.log(props);
   
   return <button className={['Button', className].join(' ')} {...props} />
 }
