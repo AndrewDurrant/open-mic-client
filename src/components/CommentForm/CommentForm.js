@@ -12,14 +12,13 @@ export class CommentForm extends Component {
     const { text } = ev.target;
 
     OpenMicApiService.postComment(this.props.videoId, text.value)
-      .then(res => {
-        console.log(res)
+      .then(data => {
+        this.context.addComment(data);
       })
-      // .then(this.context.addComment)
-      // .then(() => {
-      //   text.value = ''
-      // })
-      .catch(this.context.setError);
+      .then(() => {
+        text.value = ''
+      })
+      .catch(this.context.setError)
   }
 
   render() {

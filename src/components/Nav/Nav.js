@@ -13,7 +13,8 @@ export class Nav extends Component {
   }
 
   handleLogoutClick = () => {
-    console.log('logging out now!')
+    this.setState({ menuOpen: !this.state.menuOpen })
+    TokenService.clearAuthToken();
   }
 
   renderAuthLinks() {
@@ -25,7 +26,7 @@ export class Nav extends Component {
           </Link>
         </li>
         <li>
-          <Link to='/logout' onClick={this.handleMenuOpen}>
+          <Link to='/' onClick={this.handleLogoutClick}>
             Log out
           </Link>
         </li>

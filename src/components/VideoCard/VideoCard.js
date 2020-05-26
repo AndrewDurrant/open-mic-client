@@ -31,13 +31,7 @@ export class VideoCard extends Component {
   }
 
   renderComments = (videoComments) => {
-    let comments = [];
-    for (let i = 0; i < 2; i++) {      
-      if (videoComments[i]) {
-        comments.push(<p key={i}>{videoComments[i].comment}</p>)
-      }
-    }
-    return comments;
+    return videoComments.sort((a, b) => Date.parse(b.date_created) - Date.parse(a.date_created)).slice(0, 2).map((comment, i) => <p key={i}>{videoComments[i].comment}</p>)
   }
 
   renderVideo() {

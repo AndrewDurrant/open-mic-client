@@ -23,10 +23,11 @@ const OpenMicApiService = {
       },
       body: JSON.stringify({
         video_id: videoId,
+        rating: null,
         comment: text,
       }),
     })
-      .then(res =>
+      .then(res => 
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
@@ -47,7 +48,9 @@ const OpenMicApiService = {
     })
       .then(res =>
         (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
+          ? res.json().then(e => {
+            Promise.reject(e)
+          })
           : res.json()
       )
   },
