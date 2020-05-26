@@ -21,7 +21,7 @@ export class Nav extends Component {
     return (
       <ul className={this.state.menuOpen ? 'nav_links nav_links_open' : 'nav_links'}>
         <li>
-          <Link to='/' onClick={this.handleMenuOpen}>
+          <Link to='/upload-video' onClick={this.handleMenuOpen}>
             Upload video
           </Link>
         </li>

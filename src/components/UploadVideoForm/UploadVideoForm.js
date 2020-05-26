@@ -1,37 +1,89 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import './UploadVideoForm.css';
 import OpenMicApiService from '../../services/openmic-api-service'
-import VideoContext from '../../contexts/VideoContext'
-import { Button, Textarea } from '../Utils/Utils'
+import VideoListContext from '../../contexts/VideoListContext'
+import { Button, Input } from '../Utils/Utils'
 
 
-class UploadVideoForm extends Component {
+export default class UploadVideoForm extends Component {
+  static contextType = VideoListContext
+
+  // static defaultProps = {
+  //   onUploadVideoSuccess: () => {}
+  // }
+
+  state = { error: null }
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { title, link, description } = ev.target
+    const newVideo = { 
+      title: title.value, 
+      link: link.value, 
+      description: description.value
+    }    
+    OpenMicApiService.postVideo(newVideo)
+      .then(data => {
+        console.log('UPLOAD TRACK', data);
+        this.context.addVideo(data);
+      })
+      .then(() => {
+        title.value = ''
+        link.value = ''
+        description.value = ''
+        this.props.onUploadSuccess()
+      })
+      .catch(this.context.setError)
+
+  }
+
   render() {
+    const { error } = this.state
     return (
-      <main>
-        <section class="form-container">
-          <p>UPLOAD TRACK FORM: </p>
-          <form action="">
-            <div class="input-group">
-              <label for="title">Title</label>
-              <br />
-              <input type="text" name="username" id="username" required />
-            </div>
-            <div class="input-group">
-              <label for="description">Description</label>
-              <br />
-              <input type="text" name="description" id="description" />
-            </div>
-            <div class="input-group">
-              <label for="song">Select song:</label>
-              <input type="file" id="song" name="song" accept="audio/*" />
-            </div>
-            <button class="song-submit" type="submit">Save</button>
-          </form>
-        </section>
-      </main>
+      <form
+        className='UploadForm'
+        onSubmit={this.handleSubmit}
+      >
+        <div role='alert'>
+          {error && <p className='red'>{error}</p>}
+        </div>
+        <div className='form_input'>
+          <label htmlFor='UploadForm__title'>
+            Title 
+          </label>
+          <Input
+            required
+            name='title'
+            type='text'
+            id='UploadForm__title'>
+          </Input>
+        </div>
+        <div className='form_input'>
+          <label htmlFor='UploadForm__link'>
+            Link 
+          </label>
+          <Input
+            required
+            name='link'
+            type='url'
+            id='UploadForm__link'>
+          </Input>
+        </div>
+        <div className='form_input'>
+          <label htmlFor='UploadForm__description'>
+            Description 
+          </label>
+          <textarea
+            required
+            name='description'
+            type='text'
+            id='UploadForm__description'>
+          </textarea>
+        </div>
+        <Button type='submit' className='submit_btn'>
+          Upload
+        </Button>
+      </form>
     )
   }
 }
-
-export default UploadVideoForm

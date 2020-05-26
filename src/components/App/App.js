@@ -5,7 +5,7 @@ import LandingPage from '../../routes/LandingPage/LandingPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import UserHomePage from '../../routes/UserHomePage/UserHomePage'
-// import ShareMediaPage from '../../routes/UserHomePage/UserHomePage'
+import UploadVideoPage from '../../routes/UploadVideoPage/UploadVideoPage'
 // import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import './App.css'
 
@@ -44,11 +44,11 @@ class App extends Component {
               path={'/user-home'}
               component={UserHomePage}
             />
-            {/* <Route
-              path={'/media-form'}
-              component={ShareMediaPage}
-            />
             <Route
+              path={'/upload-video'}
+              component={UploadVideoPage}
+            />
+            {/*<Route
               component={NotFoundPage}
             /> */}
           </Switch>

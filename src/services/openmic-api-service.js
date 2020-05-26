@@ -55,18 +55,21 @@ const OpenMicApiService = {
       )
   },
 
-  // This needs to be created
-  postVideo(videoId, text) {
-    console.log(videoId, text)
-    return fetch(`${config.API_ENDPOINT}/interactions/comment`, {
+  postVideo(video) {
+    const { title, link, description } = video;
+
+    console.log('API', title, link, description);
+
+    return fetch(`${config.API_ENDPOINT}/videos`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
         'authorization': `basic ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        video_id: videoId,
-        text,
+        title,
+        link,
+        description
       }),
     })
     .then(res =>

@@ -6,8 +6,6 @@ import VideoCard from '../../components/VideoCard/VideoCard'
 
 import './UserHomePage.css'
 
-
-
 export class UserHomePage extends Component {
   static contextType = VideoListContext
   
@@ -36,13 +34,6 @@ export class UserHomePage extends Component {
       .catch(err => this.context.setError(err))
   }
   
-  // renderVideoCardList() {
-  //   const { videoList = [] } = this.context
-    
-  //   return videoList.map(video => {
-  //     return <VideoCard key={video.id} video={video} />
-  //   })
-  // }
 
   handleChangeSection = (i) => {
     this.setState({ currentSectionIndex: i });

@@ -45,6 +45,10 @@ export class VideoListProvider extends Component {
     console.log('show my videos')
   }
 
+  addVideo = (data) => {
+    console.log('CONTEXT', data);
+    
+  }
 
   addComment = (data) => {
     const { comment, date_created, user } = data
@@ -74,7 +78,8 @@ export class VideoListProvider extends Component {
       showMostRecent: this.showMostRecent,
       showBestRated: this.showBestRated,
       showMyVideos: this.showMyVideos,
-      addComment: this.addComment
+      addComment: this.addComment,
+      addVideo: this.addVideo
     }
     return (
       <VideoListContext.Provider value={value}>
