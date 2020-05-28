@@ -12,11 +12,12 @@ export default class Video extends Component {
     return (
       <div className="video">
         <iframe src={embedLink}
-          frameBorder='0'
           allow='autoplay; encrypted-media'
+          frameBorder='0'
           allowFullScreen
-          title='video'
+          title={video.title}
           className='video_frame'
+          loading='lazy'
         />
       </div>
     )

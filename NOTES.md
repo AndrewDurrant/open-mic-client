@@ -20,3 +20,11 @@ Current User Stories:
 4- Add local user nav with: most recent(default), favorites, and my Videos
 
 !!!! Use github repo -> thinkful-ed -> blogful-client ->Branch: login-endpoint
+
+**Thursday 5.28.2020**
+Issues:
+1- client side does not check for auth soon enough. An unauthorized user can log in and the front end thinks they are now authorized. It is only once they try to comment or upload a video(protected endpoints) that they are denied access.
+
+2- So we do not return anything from delete and patch requests?
+
+3- 

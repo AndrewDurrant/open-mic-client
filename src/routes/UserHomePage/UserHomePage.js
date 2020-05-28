@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
-import { Section } from '../../components/Utils/Utils'
+import { Section, Button } from '../../components/Utils/Utils'
 import VideoCard from '../../components/VideoCard/VideoCard'
 import UserVideoCard from '../../components/UserVideoCard/UserVideoCard'
 import TokenService from '../../services/token-services'
@@ -37,9 +38,13 @@ export class UserHomePage extends Component {
         if (TokenService.hasAuthToken()) {
           OpenMicApiService.getUser()
             .then(data => {
-            this.context.setUser(...data)
+              this.context.setUser(...data)
             })
-            .catch(err => console.log('ERRORING', err))
+            .catch(err => {
+              console.log('ERRROR', err)
+              TokenService.clearAuthToken()
+              this.context.setUser(null)
+            })
         }
         
       })
@@ -68,13 +73,17 @@ export class UserHomePage extends Component {
 
   renderSectionContent = () => {
     const { sections, currentSectionIndex } = this.state;
-    const currentSection = sections[currentSectionIndex].content() || '';
-    if (currentSection.length < 1) {
+    // get items to display
+    const currentSection = sections[currentSectionIndex].content();
+    if (currentSectionIndex !== 2 && currentSection.length < 1) {
       return <p></p>
-    } else if (currentSectionIndex === 2) {
+    } else if (currentSectionIndex === 2 && this.context.authUser) {
+      console.log(this.context.authUser)
       return currentSection.map(video => {
         return <UserVideoCard key={video.id} video={video} onSuccess={this.handleSuccess} />
       })
+    } else if (currentSectionIndex === 2) {
+      return <Link to='/register' className='text-btn'>sign up to share a video</Link>
     }
     return currentSection.map(video => {
       return <VideoCard key={video.id} video={video} />

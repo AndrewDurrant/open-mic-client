@@ -29,3 +29,12 @@
 .user_links_active {
   font-weight: bold;
 }
+
+.text-btn {
+  color: #C6DABF;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+  border: 1px solid #C6DABF;
+  padding:10px;
+}

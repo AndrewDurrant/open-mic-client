@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './Nav.css'
 import TokenService from '../../services/token-services';
+import VideoListContext from '../../contexts/VideoListContext'
 
 export class Nav extends Component {
+  static contextType = VideoListContext;
+
   state = {
     menuOpen: false
   }
@@ -15,6 +18,7 @@ export class Nav extends Component {
   handleLogoutClick = () => {
     this.setState({ menuOpen: !this.state.menuOpen })
     TokenService.clearAuthToken();
+    this.context.clearUser()
   }
 
   renderAuthLinks() {

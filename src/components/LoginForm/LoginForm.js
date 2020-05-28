@@ -7,11 +7,11 @@ import VideoListContext from '../../contexts/VideoListContext';
 export default class LoginForm extends Component {
   static contextType = VideoListContext;
   
-  // static defaultProps = {
-  //   onLoginSuccess: () => {}
-  // }
-
   state = { error: null }
+
+  handleToLowerCase = ev => {
+    ev.target.value = ev.target.value.toLowerCase();
+  }
 
   handleSubmitBasicAuth = ev => {
     ev.preventDefault()
@@ -20,7 +20,6 @@ export default class LoginForm extends Component {
     TokenService.saveAuthToken(
       TokenService.makeBasicAuthToken(user_name.value, password.value)
     )
-  
     user_name.value = ''
     password.value = ''
     this.props.onLoginSuccess()
@@ -43,7 +42,8 @@ export default class LoginForm extends Component {
           <Input
             required
             name='user_name'
-            id='LoginForm__user_name'>
+            id='LoginForm__user_name'
+            onChange={this.handleToLowerCase}>
           </Input>
         </div>
         <div className='form_input'>
