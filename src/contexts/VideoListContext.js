@@ -20,7 +20,6 @@ export class VideoListProvider extends Component {
   };
 
   setUser = (authUser) => {
-    console.log('context', authUser)
     this.setState({ authUser })
   }
   
@@ -33,7 +32,6 @@ export class VideoListProvider extends Component {
   }
 
   setError = error => {
-    console.error(error)
     this.setState({ error })
   }
 
@@ -56,11 +54,6 @@ export class VideoListProvider extends Component {
     if (!this.state.authUser) return [];
     const userVideos = this.state.videoList.filter(video => video.user_id === this.state.authUser.id);
     return userVideos;
-  }
-
-  addVideo = (data) => {
-    console.log('CONTEXT', data);
-    
   }
 
   addComment = (data) => {

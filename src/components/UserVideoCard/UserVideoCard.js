@@ -64,8 +64,8 @@ export class UserVideoCard extends Component {
     const { title, description } = ev.target;
 
     OpenMicApiService.updateVideo(this.props.videoId, title.value, description.value)
-      .then(data => {
-        console.log(data)
+      .then(() => {
+        this.props.onSuccess();
       })
       .catch(this.context.setError)
   }
@@ -74,7 +74,6 @@ export class UserVideoCard extends Component {
     OpenMicApiService.deleteVideo(this.props.video.id)
       .then(() => {
         this.props.onSuccess();
-        //  push user to home page
       })
       .catch(err => this.context.setError(err));
   }
@@ -87,10 +86,9 @@ export class UserVideoCard extends Component {
     }
     OpenMicApiService.updateVideo(vid)
       .then(res => {
-        console.log('UPDATED', res);
         this.props.onSuccess();
       })
-      .catch(err => console.log(err));
+      .catch(err => this.context.setError(err));
   }
 
   render() {

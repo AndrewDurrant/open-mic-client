@@ -41,7 +41,6 @@ export class UserHomePage extends Component {
               this.context.setUser(...data)
             })
             .catch(err => {
-              console.log('ERRROR', err)
               TokenService.clearAuthToken()
               this.context.setUser(null)
             })
