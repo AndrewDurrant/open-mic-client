@@ -12,21 +12,19 @@ import './UserVideoCard.css'
 
 
 export class UserVideoCard extends Component {
-  state = {
-    userRating: 1
-  }
-
-  static defaultProps = {
-    match: { params: {} },
-  }
-
   static contextType = VideoListContext;
 
-  componentDidMount() {
-    this.context.clearError()
-    this.context.setVideo(this.props.video)
+  state = {
+    userRating: 1,
+    title: this.props.video.title,
+    description: this.props.video.description
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
   //Refactor this method to do a POST to the API and also PATCH with updated rating
   onStarClick(nextValue, prevValue, name) {
     this.setState({userRating: nextValue})
@@ -72,17 +70,40 @@ export class UserVideoCard extends Component {
       .catch(this.context.setError)
   }
 
+  handleDelete = () => {
+    OpenMicApiService.deleteVideo(this.props.video.id)
+      .then(() => {
+        this.props.onSuccess();
+        //  push user to home page
+      })
+      .catch(err => this.context.setError(err));
+  }
+
+  handleUpdateVideo = () => {
+    const vid = { 
+      title: this.state.title,
+      description: this.state.description,
+      id: this.props.video.id
+    }
+    OpenMicApiService.updateVideo(vid)
+      .then(res => {
+        console.log('UPDATED', res);
+        this.props.onSuccess();
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
     const { error } = this.context;
-    const { userRating } = this.state;
-    const { comments, rating, title, description, id } = this.props.video;
+    const { userRating, title, description } = this.state;
+    const { comments, rating, id } = this.props.video;
 
     return (
-      <main className='UserVideoCard'>
+      <main className='VideoCard'>
         <div className='video_rating'>
           {AverageRating(Math.round(rating))}
         </div>
-        <form>
+        <div>
           <div className='video_title'>
             <Textarea
               required
@@ -92,7 +113,7 @@ export class UserVideoCard extends Component {
               value={title}
               cols='30'
               rows='3'
-              placeholder='{title}'>
+              onChange={this.handleChange}>
             </Textarea>
           </div>
           {error
@@ -108,21 +129,22 @@ export class UserVideoCard extends Component {
                 value={description}
                 cols='30'
                 rows='3'
-                placeholder='{description}'>
+                onChange={this.handleChange}>
               </Textarea>
             </p>
-            {/* <h4>@{this.props.video.user.user_name}</h4> */}
           </div>
           {TokenService.hasAuthToken()
           ? this.renderAuthContent(id, comments, userRating)
           : null}
-          <Button type='submit' className='basic_btn'>
-            Update
-          </Button>
-          <Button>
-            Delete
-          </Button>
-        </form>
+          <div className='btn_container'>
+            <Button type='submit' className='basic_btn' onClick={this.handleUpdateVideo}>
+              Update
+            </Button>
+            <Button onClick={this.handleDelete} className='basic_btn'>
+              Delete
+            </Button>
+          </div>
+        </div>
       </main>
     )
   }

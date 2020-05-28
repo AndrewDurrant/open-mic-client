@@ -4,6 +4,7 @@ import OpenMicApiService from '../../services/openmic-api-service'
 import { Section } from '../../components/Utils/Utils'
 import VideoCard from '../../components/VideoCard/VideoCard'
 import UserVideoCard from '../../components/UserVideoCard/UserVideoCard'
+import TokenService from '../../services/token-services'
 
 import './UserHomePage.css'
 
@@ -32,6 +33,16 @@ export class UserHomePage extends Component {
     this.context.clearError()
     OpenMicApiService.getVideos()
       .then(res => this.context.setVideoList(res))
+      .then(() => {
+        if (TokenService.hasAuthToken()) {
+          OpenMicApiService.getUser()
+            .then(data => {
+            this.context.setUser(...data)
+            })
+            .catch(err => console.log('ERRORING', err))
+        }
+        
+      })
       .catch(err => this.context.setError(err))
   }
   
@@ -62,7 +73,7 @@ export class UserHomePage extends Component {
       return <p></p>
     } else if (currentSectionIndex === 2) {
       return currentSection.map(video => {
-        return <UserVideoCard key={video.id} video={video} />
+        return <UserVideoCard key={video.id} video={video} onSuccess={this.handleSuccess} />
       })
     }
     return currentSection.map(video => {
@@ -70,6 +81,13 @@ export class UserHomePage extends Component {
     })
   };
 
+  handleSuccess = () => {
+    const { location, history } = this.props
+    const destination = (location.state || {}).from || '/'
+    console.log('WE made it here!');
+    
+    return history.push(destination)
+  }
 
   render() {
     const { error } = this.context

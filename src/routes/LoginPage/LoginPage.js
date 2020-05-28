@@ -5,7 +5,6 @@ import './LoginPage.css';
 import LoginForm from '../../components/LoginForm/LoginForm'
 import { Section } from '../../components/Utils/Utils'
 
-
 export class LoginPage extends Component {
   static defaultProps = {
     location: {},

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { Button, Input } from '../Utils/Utils'
 import './LoginForm.css';
-// import AuthApiService from '../../services/AuthApiService'
 import TokenService from '../../services/token-services';
-import OpenMicApiService from '../../services/openmic-api-service';
+import VideoListContext from '../../contexts/VideoListContext';
 
 export default class LoginForm extends Component {
-  static defaultProps = {
-    onLoginSuccess: () => {}
-  }
+  static contextType = VideoListContext;
+  
+  // static defaultProps = {
+  //   onLoginSuccess: () => {}
+  // }
 
   state = { error: null }
-
 
   handleSubmitBasicAuth = ev => {
     ev.preventDefault()
@@ -20,14 +20,10 @@ export default class LoginForm extends Component {
     TokenService.saveAuthToken(
       TokenService.makeBasicAuthToken(user_name.value, password.value)
     )
-      OpenMicApiService.getUser()
-      .then(res => {
-        console.log('RESPONSING', res)
-      })
-      .catch(err => console.log('ERRORING', err))
-      user_name.value = ''
-      password.value = ''
-      this.props.onLoginSuccess()
+  
+    user_name.value = ''
+    password.value = ''
+    this.props.onLoginSuccess()
   }
 
   render() {

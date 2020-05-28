@@ -77,7 +77,6 @@ export class VideoCard extends Component {
           : this.renderVideo()}
         <div className='video_description'>
           <p>{description}</p>
-          {/* <h4>@{this.props.video.user.user_name}</h4> */}
         </div>
 
         {TokenService.hasAuthToken()

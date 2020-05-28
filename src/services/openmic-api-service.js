@@ -28,6 +28,32 @@ const OpenMicApiService = {
       )
   },
 
+  deleteVideo(videoId) {
+    return fetch(`${config.API_ENDPOINT}/videos/${videoId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
+      },
+    })
+  },
+
+  updateVideo(video) {
+    const { title, description, id } = video;
+    return fetch(`${config.API_ENDPOINT}/videos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `basic ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        title,
+        id,
+        description
+      }),
+    })
+  },
+
   postVideo(video) {
     const { title, link, description } = video;
 
@@ -50,27 +76,6 @@ const OpenMicApiService = {
     )
   },
 
-  updateVideo(videoId, title, description) {
-
-    return fetch(`${config.API_ENDPOINT}/videos`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
-      },
-      body: JSON.stringify({
-        videoId,
-        title,
-        description
-      }),
-    })
-    .then(res => 
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
-  },
-  
   postComment(videoId, text) {
     return fetch(`${config.API_ENDPOINT}/interactions/comment`, {
       method: 'POST',

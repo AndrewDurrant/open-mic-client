@@ -1,0 +1,73 @@
+.VideoCard {
+  margin: 0 auto 3rem;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #EFEFEF;
+  color: #333;
+}
+
+.video_rating {
+  letter-spacing: 3px;
+  color: goldenrod;
+}
+
+.video_comments {
+  width: 75%;
+  margin: 1.5rem auto;
+  background-color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(17, 76, 95, 0.5);
+}
+
+.video_comments p {
+  padding: .5rem 1rem;
+  border-bottom: 1px solid rgba(17, 75, 95, 0.5);
+}
+
+.video_comments p:last-of-type {
+  border: none;
+}
+
+.video_title {
+  text-align: left;
+  font-weight: 700;
+  padding: 1rem 0;
+}
+
+.video_description {
+  display: flex;
+  align-items: center;
+}
+
+.video_description p {
+  display: block;
+  font-size: 14px;
+  text-align: right;
+  flex: 2;
+  padding: .5rem 1rem .5rem .5rem;
+}
+
+.video_description h4 {
+  flex: 1;
+  text-align: left;
+  color: #072337;
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.basic_btn {
+  display: block;
+  flex: 1;
+  height: 3rem;
+  margin: 0 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #072337;
+  color: #C6DABF;
+  cursor: pointer;
+}

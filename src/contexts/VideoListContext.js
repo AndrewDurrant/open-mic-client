@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 
 const VideoListContext = React.createContext({
+  authUser: null,
   videoList: [],
   error: null,
+  setUser: () => {},
+  clearUser: () => {},
   setError: () => {},
   clearError: () => {},
   setVideoList: () => {},
@@ -11,9 +14,18 @@ export default VideoListContext
 
 export class VideoListProvider extends Component {
   state = {
+    authUser: null,
     videoList: [],
     error: null,
   };
+
+  setUser = (authUser) => {
+    this.setState({ authUser })
+  }
+  
+  clearUser = (authUser) => {
+    this.setState({ authUser: null })
+  }
 
   setVideoList = videoList => {
     this.setState({ videoList })
@@ -39,14 +51,9 @@ export class VideoListProvider extends Component {
     
   }
 
-
-  // need jwt to use the filter **
   showMyVideos = () => {
-    // fetch instead of filter!!
-    // const userVideos = this.state.videoList.filter(video => video.user_id === )
-    // // filter where author === authUser
-    // console.log('show my videos')
-    // return userVideos
+    const userVideos = this.state.videoList.filter(video => video.user_id === this.state.authUser.id);
+    return userVideos;
   }
 
   addVideo = (data) => {
@@ -74,8 +81,11 @@ export class VideoListProvider extends Component {
 
   render() {
     const value = {
+      authUser: this.state.authUser,
       videoList: this.state.videoList,
       error: this.state.error,
+      setUser: this.setUser,
+      clearUser: this.clearUser,
       setError: this.setError,
       clearError: this.clearError,
       setVideoList: this.setVideoList,
