@@ -39,10 +39,14 @@ export class VideoListProvider extends Component {
     
   }
 
+
+  // need jwt to use the filter **
   showMyVideos = () => {
-    // filter where author === authUser
-    // return videoList
-    console.log('show my videos')
+    // fetch instead of filter!!
+    // const userVideos = this.state.videoList.filter(video => video.user_id === )
+    // // filter where author === authUser
+    // console.log('show my videos')
+    // return userVideos
   }
 
   addVideo = (data) => {

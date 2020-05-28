@@ -8,10 +8,6 @@ import { Button, Input } from '../Utils/Utils'
 export default class UploadVideoForm extends Component {
   static contextType = VideoListContext
 
-  // static defaultProps = {
-  //   onUploadVideoSuccess: () => {}
-  // }
-
   state = { error: null }
 
   handleSubmit = ev => {

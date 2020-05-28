@@ -3,6 +3,7 @@ import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
 import { Section } from '../../components/Utils/Utils'
 import VideoCard from '../../components/VideoCard/VideoCard'
+import UserVideoCard from '../../components/UserVideoCard/UserVideoCard'
 
 import './UserHomePage.css'
 
@@ -59,6 +60,10 @@ export class UserHomePage extends Component {
     const currentSection = sections[currentSectionIndex].content() || '';
     if (currentSection.length < 1) {
       return <p></p>
+    } else if (currentSectionIndex === 2) {
+      return currentSection.map(video => {
+        return <UserVideoCard key={video.id} video={video} />
+      })
     }
     return currentSection.map(video => {
       return <VideoCard key={video.id} video={video} />

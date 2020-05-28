@@ -1,0 +1,14 @@
+.NotFoundPage {
+  padding-top: 4rem;
+}
+
+.NotFoundPage h2 {
+  font-size: 5rem;
+}
+
+.NotFoundPage p {
+  max-width: 18rem;
+  margin: 1rem auto;
+  line-height: 1.4;
+  font-size: 1.3rem;
+}

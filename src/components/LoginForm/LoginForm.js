@@ -3,6 +3,7 @@ import { Button, Input } from '../Utils/Utils'
 import './LoginForm.css';
 // import AuthApiService from '../../services/AuthApiService'
 import TokenService from '../../services/token-services';
+import OpenMicApiService from '../../services/openmic-api-service';
 
 export default class LoginForm extends Component {
   static defaultProps = {
@@ -19,10 +20,14 @@ export default class LoginForm extends Component {
     TokenService.saveAuthToken(
       TokenService.makeBasicAuthToken(user_name.value, password.value)
     )
-
-    user_name.value = ''
-    password.value = ''
-    this.props.onLoginSuccess()
+      OpenMicApiService.getUser()
+      .then(res => {
+        console.log('RESPONSING', res)
+      })
+      .catch(err => console.log('ERRORING', err))
+      user_name.value = ''
+      password.value = ''
+      this.props.onLoginSuccess()
   }
 
   render() {

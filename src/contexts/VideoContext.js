@@ -10,7 +10,7 @@ const VideoContext = React.createContext({
   comments: [],
   ratings: [],
   users: [],
-  error: null,
+  error: null, 
   setError: () => {},
   clearError: () => { },
   setVideo: () => {},

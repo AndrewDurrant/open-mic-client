@@ -1,8 +1,9 @@
 .App {
   text-align: center;
   background-color: #072337;
+  color: #efefef;
 }
 
 .App_main {
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem);
 }

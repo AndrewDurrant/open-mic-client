@@ -1,4 +1,12 @@
 .UploadVideoPage {
-  margin: 4rem auto;
+  margin: 0 auto;
+  padding-top: 4rem;
   color: #efefef;
+}
+
+.heading-blurb {
+  display: block;
+  margin: 1rem auto 0;
+  max-width: 20rem;
+  line-height: 1.5;
 }

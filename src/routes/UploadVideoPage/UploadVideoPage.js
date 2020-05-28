@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './UploadVideoPage.css'
 import UploadVideoForm from '../../components/UploadVideoForm/UploadVideoForm';
 import { Section } from '../../components/Utils/Utils';
 
@@ -13,8 +14,9 @@ export class UploadVideoPage extends Component {
 
   render() {
     return (
-      <Section className='RegistrationPage'>
-        <h2>Upload Video Link</h2>
+      <Section className='UploadVideoPage'>
+        <h2>Share your Video</h2>
+        <p className='heading-blurb'>submit your embeddable link to show the community what you can do</p>
         <UploadVideoForm onUploadSuccess={this.handleUploadSuccess}  />
       </Section>
     )

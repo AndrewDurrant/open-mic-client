@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import StarRatingComponent from 'react-star-rating-component'
 import { AverageRating } from '../../components/Utils/Utils'
 import Video from '../../components/Video/Video'
-import VideoContext from '../../contexts/VideoContext'
+import VideoListContext from '../../contexts/VideoListContext'
 import CommentForm from '../CommentForm/CommentForm'
 import TokenService from '../../services/token-services';
+import OpenMicApiService from '../../services/openmic-api-service'
+import { Button, Textarea } from '../Utils/Utils'
 
 import './UserVideoCard.css'
 
@@ -18,7 +20,7 @@ export class UserVideoCard extends Component {
     match: { params: {} },
   }
 
-  static contextType = VideoContext;
+  static contextType = VideoListContext;
 
   componentDidMount() {
     this.context.clearError()
@@ -59,33 +61,71 @@ export class UserVideoCard extends Component {
     )
   }
 
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { title, description } = ev.target;
+
+    OpenMicApiService.updateVideo(this.props.videoId, title.value, description.value)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(this.context.setError)
+  }
+
   render() {
     const { error } = this.context;
     const { userRating } = this.state;
     const { comments, rating, title, description, id } = this.props.video;
 
     return (
-      <main className='VideoCard'>
+      <main className='UserVideoCard'>
         <div className='video_rating'>
           {AverageRating(Math.round(rating))}
         </div>
-        <h2 className='video_title'>
-          {title}
-        </h2>
-        {error
-          ? <p className='red'>There was an error, try again</p>
-          : this.renderVideo()}
-        <div className='video_description'>
-          <p>{description}</p>
-          {/* <h4>@{this.props.video.user.user_name}</h4> */}
-        </div>
-
-        {TokenService.hasAuthToken()
+        <form>
+          <div className='video_title'>
+            <Textarea
+              required
+              className='text_form'
+              aria-label='{title}'
+              name='title'
+              value={title}
+              cols='30'
+              rows='3'
+              placeholder='{title}'>
+            </Textarea>
+          </div>
+          {error
+            ? <p className='red'>There was an error, try again</p>
+            : this.renderVideo()}
+          <div className='video_description'>
+            <p>
+              <Textarea
+                required
+                className='text_form'
+                aria-label='{description}'
+                name='description'
+                value={description}
+                cols='30'
+                rows='3'
+                placeholder='{description}'>
+              </Textarea>
+            </p>
+            {/* <h4>@{this.props.video.user.user_name}</h4> */}
+          </div>
+          {TokenService.hasAuthToken()
           ? this.renderAuthContent(id, comments, userRating)
           : null}
+          <Button type='submit' className='basic_btn'>
+            Update
+          </Button>
+          <Button>
+            Delete
+          </Button>
+        </form>
       </main>
     )
   }
 }
 
-export default VideoCard
+export default UserVideoCard
