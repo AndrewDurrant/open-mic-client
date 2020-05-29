@@ -21,7 +21,7 @@ const video = {
 describe('Video component', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<Video link={video.link} />, div)
+    ReactDOM.render(<Video link={video.link} video={video}/>, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 })

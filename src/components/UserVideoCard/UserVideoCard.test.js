@@ -22,7 +22,7 @@ describe('UserVideoCard component', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<UserVideoCard title={video.title} description={video.description} />, div)
+    ReactDOM.render(<UserVideoCard title={video.title} description={video.description} video={video} />, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 })

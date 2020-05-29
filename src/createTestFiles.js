@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-const components = ['CommentForm', 'LoginForm', 'Nav', 'RegistrationForm', 'UploadVideoForm', 'UserVideoCard', 'Video', 'VideoCard']
+const components = ['LandingPage', 'LoginPage', 'NotFoundPage', 'RegistrationPage', 'UploadVideoPage', 'UserHomePage']
 
 //Make a folder:
 // components.forEach((component) => {

@@ -98,7 +98,7 @@ export class UserVideoCard extends Component {
     const { error } = this.context;
     const { userRating, title, description } = this.state;
     const { comments, rating, id } = this.props.video;
-
+    
     return (
       <main className='VideoCard'>
         <div className='video_rating'>
