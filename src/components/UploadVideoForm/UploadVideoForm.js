@@ -4,7 +4,6 @@ import OpenMicApiService from '../../services/openmic-api-service'
 import VideoListContext from '../../contexts/VideoListContext'
 import { Button, Input } from '../Utils/Utils'
 
-
 export default class UploadVideoForm extends Component {
   static contextType = VideoListContext
 
@@ -17,13 +16,11 @@ export default class UploadVideoForm extends Component {
       title: title.value, 
       link: link.value, 
       description: description.value
-    }    
+    }
+    // send new video to db
     OpenMicApiService.postVideo(newVideo)
       .then(data => {
-        console.log('UPLOAD TRACK', data);
-        this.context.addVideo(data);
-      })
-      .then(() => {
+        // once video is posted to db, clear inputs and redirect user
         title.value = ''
         link.value = ''
         description.value = ''

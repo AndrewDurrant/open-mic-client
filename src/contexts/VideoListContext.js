@@ -40,18 +40,22 @@ export class VideoListProvider extends Component {
   }
 
   showMostRecent = () => {
+    // sort videos by date created, return sorted list
     const mostRecent = this.state.videoList.sort((a, b) => Date.parse(b.date_created) - Date.parse(a.date_created))
     return mostRecent;
   }
 
   showBestRated = () => {
+    // sort videos by highest rating, return sorted list
     const bestRated = this.state.videoList.sort((a, b) => b.rating - a.rating)
     return bestRated;
     
   }
 
   showMyVideos = () => {
+    // check if there is an auth user
     if (!this.state.authUser) return [];
+    // filter videos for video user === auth user, return filtered list
     const userVideos = this.state.videoList.filter(video => video.user_id === this.state.authUser.id);
     return userVideos;
   }

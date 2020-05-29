@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
+import './VideoCard.css'
 import StarRatingComponent from 'react-star-rating-component'
 import { AverageRating } from '../../components/Utils/Utils'
+import TokenService from '../../services/token-services'
+import VideoListContext from '../../contexts/VideoListContext'
+
+// components
 import Video from '../../components/Video/Video'
-import VideoContext from '../../contexts/VideoContext'
 import CommentForm from '../CommentForm/CommentForm'
-import TokenService from '../../services/token-services';
-
-import './VideoCard.css'
-
 
 export class VideoCard extends Component {
   state = {
@@ -18,12 +18,7 @@ export class VideoCard extends Component {
     match: { params: {} },
   }
 
-  static contextType = VideoContext;
-
-  componentDidMount() {
-    this.context.clearError()
-    this.context.setVideo(this.props.video)
-  }
+  static contextType = VideoListContext;
 
   //Refactor this method to do a POST to the API and also PATCH with updated rating
   onStarClick(nextValue, prevValue, name) {

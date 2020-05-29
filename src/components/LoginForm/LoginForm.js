@@ -10,6 +10,7 @@ export default class LoginForm extends Component {
   state = { error: null }
 
   handleToLowerCase = ev => {
+    // prevents capital letters from  being used for username
     ev.target.value = ev.target.value.toLowerCase();
   }
 
@@ -17,9 +18,11 @@ export default class LoginForm extends Component {
     ev.preventDefault()
     const { user_name, password } = ev.target
 
+    // store created token in localStorage
     TokenService.saveAuthToken(
       TokenService.makeBasicAuthToken(user_name.value, password.value)
     )
+    // clear inputs and reroute user
     user_name.value = ''
     password.value = ''
     this.props.onLoginSuccess()

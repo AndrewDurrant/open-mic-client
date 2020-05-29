@@ -3,6 +3,7 @@ import './LandingPage.css'
 import { Link } from 'react-router-dom'
 import { Redirect } from "react-router-dom";
 import TokenService from '../../services/token-services';
+
 export class LandingPage extends Component {
 
   render() {
@@ -38,6 +39,8 @@ export class LandingPage extends Component {
               <p>
                 Open-Mic is a digital stage to post your audio musical performances and listen to the sounds of your fellow musicians. Hop up on stage and share or kick back with your favorite beverage and listen to the latest songs from your favorite performers.
               </p>
+              <p>Test out the app as: russ365</p>
+              <p>Their password is: abc123abc</p>
             </section>
           </main>
         }

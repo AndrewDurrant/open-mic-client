@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import './CommentForm.css';
 import VideoListContext from '../../contexts/VideoListContext'
 import OpenMicApiService from '../../services/openmic-api-service'
 import { Button, Textarea } from '../Utils/Utils'
-import './CommentForm.css';
 
 export class CommentForm extends Component {
   static contextType = VideoListContext
@@ -13,9 +13,8 @@ export class CommentForm extends Component {
 
     OpenMicApiService.postComment(this.props.videoId, text.value)
       .then(data => {
+        // once comment is posted to db, add to context
         this.context.addComment(data);
-      })
-      .then(() => {
         text.value = ''
       })
       .catch(this.context.setError)

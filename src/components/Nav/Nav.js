@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './Nav.css'
-import TokenService from '../../services/token-services';
+import TokenService from '../../services/token-services'
 import VideoListContext from '../../contexts/VideoListContext'
 
 export class Nav extends Component {
@@ -12,10 +12,12 @@ export class Nav extends Component {
   }
 
   handleMenuOpen = () => {
+    // toggles hamburger menu
     this.setState({ menuOpen: !this.state.menuOpen })
   }
 
   handleLogoutClick = () => {
+    // clear auth user data and close menu
     this.setState({ menuOpen: !this.state.menuOpen })
     TokenService.clearAuthToken();
     this.context.clearUser()

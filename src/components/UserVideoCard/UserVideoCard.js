@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
+import './UserVideoCard.css'
 import StarRatingComponent from 'react-star-rating-component'
-import { AverageRating } from '../../components/Utils/Utils'
-import Video from '../../components/Video/Video'
-import VideoListContext from '../../contexts/VideoListContext'
-import CommentForm from '../CommentForm/CommentForm'
+import { Button, Textarea, AverageRating } from '../Utils/Utils'
 import TokenService from '../../services/token-services';
 import OpenMicApiService from '../../services/openmic-api-service'
-import { Button, Textarea } from '../Utils/Utils'
+import VideoListContext from '../../contexts/VideoListContext'
 
-import './UserVideoCard.css'
+// components
+import Video from '../../components/Video/Video'
+import CommentForm from '../CommentForm/CommentForm'
+
 
 
 export class UserVideoCard extends Component {
@@ -25,12 +26,14 @@ export class UserVideoCard extends Component {
       [e.target.name]: e.target.value
     })
   }
+
   //Refactor this method to do a POST to the API and also PATCH with updated rating
   onStarClick(nextValue, prevValue, name) {
     this.setState({userRating: nextValue})
   }
 
   renderComments = (videoComments) => {
+    // sort comments by newest, show 2 most recent
     return videoComments.sort((a, b) => Date.parse(b.date_created) - Date.parse(a.date_created)).slice(0, 2).map((comment, i) => <p key={i}>{videoComments[i].comment}</p>)
   }
 
