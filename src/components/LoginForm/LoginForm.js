@@ -35,20 +35,6 @@ export default class LoginForm extends Component {
       })
   }
 
-  handleSubmitBasicAuth = ev => {
-    ev.preventDefault()
-    const { user_name, password } = ev.target
-
-    // store created token in localStorage
-    TokenService.saveAuthToken(
-      TokenService.makeBasicAuthToken(user_name.value, password.value)
-    )
-    // clear inputs and reroute user
-    user_name.value = ''
-    password.value = ''
-    this.props.onLoginSuccess()
-  }
-
   render() {
     const { error } = this.state
     return (
