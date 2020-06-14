@@ -1,24 +1,42 @@
 import React, { Component } from 'react'
+import OpenMicApiService from '../../services/openmic-api-service'
 import './RegistrationForm.css';
 
 import { Button, Input, Required } from '../Utils/Utils'
 
 export default class RegistrationForm extends Component {
   static defaultProps = {
-    onRegistrationSuccess: () => {}
+    onRegistrationSuccess: () => { }
   }
 
   state = { error: null }
+
+  handleToLowerCase = ev => {
+    // prevents capital letters from  being used for username
+    ev.target.value = ev.target.value.toLowerCase();
+  }
 
   handleSubmit = ev => {
     ev.preventDefault()
     const { full_name, user_name, password, email } = ev.target
 
-    full_name.value = ''
-    user_name.value = ''
-    password.value = ''
-    email.value = ''
-    this.props.onRegistrationSuccess()
+    this.setState({ error: null })
+    OpenMicApiService.postUser({
+      full_name: full_name.value,
+      user_name: user_name.value,
+      password: password.value,
+      email: email.value,
+    })
+      .then(user => {
+        full_name.value = ''
+        user_name.value = ''
+        password.value = ''
+        email.value = ''
+        this.props.onRegistrationSuccess()
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
   }
 
   render() {
@@ -39,8 +57,7 @@ export default class RegistrationForm extends Component {
             name='full_name'
             type='text'
             required
-            id='RegistrationForm__full_name'>
-          </Input>
+            id='RegistrationForm__full_name' />
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__user_name'>
@@ -50,8 +67,8 @@ export default class RegistrationForm extends Component {
             name='user_name'
             type='text'
             required
-            id='RegistrationForm__user_name'>
-          </Input>
+            id='RegistrationForm__user_name'
+            onChange={this.handleToLowerCase} />
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__password'>
@@ -61,8 +78,7 @@ export default class RegistrationForm extends Component {
             name='password'
             type='password'
             required
-            id='RegistrationForm__password'>
-          </Input>
+            id='RegistrationForm__password' />
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__email'>
@@ -72,8 +88,7 @@ export default class RegistrationForm extends Component {
             name='email'
             type='email'
             required
-            id='RegistrationForm__email'>
-          </Input>
+            id='RegistrationForm__email' />
         </div>
         <Button type='submit' className='submit_btn'>
           Register

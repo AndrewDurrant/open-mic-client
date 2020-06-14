@@ -13,6 +13,7 @@
 .main_nav_menu {
   z-index: 1000;
   cursor: pointer;
+  font-size: 2rem;
 }
 
 .app_logo a:link, 
