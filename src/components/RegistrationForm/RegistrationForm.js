@@ -57,7 +57,8 @@ export default class RegistrationForm extends Component {
             name='full_name'
             type='text'
             required
-            id='RegistrationForm__full_name' />
+            id='RegistrationForm__full_name'>
+          </Input>
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__user_name'>
@@ -68,7 +69,8 @@ export default class RegistrationForm extends Component {
             type='text'
             required
             id='RegistrationForm__user_name'
-            onChange={this.handleToLowerCase} />
+            onChange={this.handleToLowerCase}>
+          </Input>
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__password'>
@@ -78,7 +80,8 @@ export default class RegistrationForm extends Component {
             name='password'
             type='password'
             required
-            id='RegistrationForm__password' />
+            id='RegistrationForm__password'>
+          </Input>
         </div>
         <div className='form_input'>
           <label htmlFor='RegistrationForm__email'>
@@ -88,7 +91,8 @@ export default class RegistrationForm extends Component {
             name='email'
             type='email'
             required
-            id='RegistrationForm__email' />
+            id='RegistrationForm__email'>
+          </Input>
         </div>
         <Button type='submit' className='submit_btn'>
           Register
