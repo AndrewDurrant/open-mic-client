@@ -11,7 +11,7 @@ import CommentForm from '../CommentForm/CommentForm'
 
 export class VideoCard extends Component {
   state = {
-    userRating: 1
+    userRating: 0
   }
 
   static defaultProps = {

@@ -38,7 +38,7 @@ export class UserHomePage extends Component {
     OpenMicApiService.getVideos()
       .then(res => this.context.setVideoList(res))
       .then(() => {
-        if (TokenService.hasAuthToken()) {
+        if (TokenService.hasAuthToken()) {          
           // retrieve auth user info from db
           OpenMicApiService.getUser()
             .then(data => {

@@ -2,12 +2,42 @@ import config from '../config'
 import TokenService from '../services/token-services'
 
 const OpenMicApiService = {
+  postLogin(credentials) {
+    return fetch(`${config.API_ENDPOINT}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
   getUser() {
     return fetch(`${config.API_ENDPOINT}/users`, {
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
+
+  postUser(user) {
+    return fetch(`${config.API_ENDPOINT}/users`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
     })
       .then(res =>
         (!res.ok)
@@ -33,7 +63,7 @@ const OpenMicApiService = {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
     })
   },
@@ -44,7 +74,7 @@ const OpenMicApiService = {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         title,
@@ -61,7 +91,7 @@ const OpenMicApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         title,
@@ -69,11 +99,11 @@ const OpenMicApiService = {
         description
       }),
     })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
   },
 
   postComment(videoId, text) {
@@ -81,7 +111,7 @@ const OpenMicApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         video_id: videoId,
@@ -89,7 +119,7 @@ const OpenMicApiService = {
         comment: text,
       }),
     })
-      .then(res => 
+      .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
@@ -102,7 +132,7 @@ const OpenMicApiService = {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         video_id: videoId,

@@ -1,24 +1,42 @@
 import React, { Component } from 'react'
+import OpenMicApiService from '../../services/openmic-api-service'
 import './RegistrationForm.css';
 
 import { Button, Input, Required } from '../Utils/Utils'
 
 export default class RegistrationForm extends Component {
   static defaultProps = {
-    onRegistrationSuccess: () => {}
+    onRegistrationSuccess: () => { }
   }
 
   state = { error: null }
+
+  handleToLowerCase = ev => {
+    // prevents capital letters from  being used for username
+    ev.target.value = ev.target.value.toLowerCase();
+  }
 
   handleSubmit = ev => {
     ev.preventDefault()
     const { full_name, user_name, password, email } = ev.target
 
-    full_name.value = ''
-    user_name.value = ''
-    password.value = ''
-    email.value = ''
-    this.props.onRegistrationSuccess()
+    this.setState({ error: null })
+    OpenMicApiService.postUser({
+      full_name: full_name.value,
+      user_name: user_name.value,
+      password: password.value,
+      email: email.value,
+    })
+      .then(user => {
+        full_name.value = ''
+        user_name.value = ''
+        password.value = ''
+        email.value = ''
+        this.props.onRegistrationSuccess()
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
   }
 
   render() {
@@ -50,7 +68,8 @@ export default class RegistrationForm extends Component {
             name='user_name'
             type='text'
             required
-            id='RegistrationForm__user_name'>
+            id='RegistrationForm__user_name'
+            onChange={this.handleToLowerCase}>
           </Input>
         </div>
         <div className='form_input'>

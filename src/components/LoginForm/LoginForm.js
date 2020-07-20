@@ -3,10 +3,11 @@ import { Button, Input } from '../Utils/Utils'
 import './LoginForm.css';
 import TokenService from '../../services/token-services';
 import VideoListContext from '../../contexts/VideoListContext';
+import OpenMicApiService from '../../services/openmic-api-service';
 
 export default class LoginForm extends Component {
   static contextType = VideoListContext;
-  
+
   state = { error: null }
 
   handleToLowerCase = ev => {
@@ -14,18 +15,24 @@ export default class LoginForm extends Component {
     ev.target.value = ev.target.value.toLowerCase();
   }
 
-  handleSubmitBasicAuth = ev => {
+  handleSubmitJwtAuth = ev => {
     ev.preventDefault()
+    this.setState({ error: null })
     const { user_name, password } = ev.target
 
-    // store created token in localStorage
-    TokenService.saveAuthToken(
-      TokenService.makeBasicAuthToken(user_name.value, password.value)
-    )
-    // clear inputs and reroute user
-    user_name.value = ''
-    password.value = ''
-    this.props.onLoginSuccess()
+    OpenMicApiService.postLogin({
+      user_name: user_name.value,
+      password: password.value,
+    })
+      .then(res => {
+        user_name.value = ''
+        password.value = ''
+        TokenService.saveAuthToken(res.authToken)
+        this.props.onLoginSuccess()
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
   }
 
   render() {
@@ -33,7 +40,7 @@ export default class LoginForm extends Component {
     return (
       <form
         className='LoginForm'
-        onSubmit={this.handleSubmitBasicAuth}
+        onSubmit={this.handleSubmitJwtAuth}
       >
         <div role='alert'>
           {error && <p className='red'>{error}</p>}
