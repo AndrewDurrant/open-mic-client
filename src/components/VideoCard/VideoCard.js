@@ -4,6 +4,8 @@ import StarRatingComponent from 'react-star-rating-component'
 import { AverageRating } from '../../components/Utils/Utils'
 import TokenService from '../../services/token-services'
 import VideoListContext from '../../contexts/VideoListContext'
+import OpenMicApiService from '../../services/openmic-api-service'
+
 
 // components
 import Video from '../../components/Video/Video'
@@ -11,7 +13,7 @@ import CommentForm from '../CommentForm/CommentForm'
 
 export class VideoCard extends Component {
   state = {
-    userRating: 0
+    userRating: 0,
   }
 
   static defaultProps = {
@@ -21,12 +23,24 @@ export class VideoCard extends Component {
   static contextType = VideoListContext;
 
   //Refactor this method to do a POST to the API and also PATCH with updated rating
-  onStarClick(nextValue, prevValue, name) {
+  onStarClick(nextValue, prevValue, name) { 
     this.setState({userRating: nextValue})
+    OpenMicApiService.postRating(this.props.video.id, nextValue)
+      .then(rating => {
+        console.log('it was a successful rating')
+        // once rating is posted to db, add to context
+        // this.context.addRating(rating);
+      })
+      .catch(this.context.setError)
   }
 
   renderComments = (videoComments) => {
-    return videoComments.sort((a, b) => Date.parse(b.date_created) - Date.parse(a.date_created)).slice(0, 2).map((comment, i) => <p key={i}>{videoComments[i].comment}</p>)
+    return videoComments.sort((a, b) => Date.parse(b.date_created) - Date.parse(a.date_created)).slice(0, 2).map((comment, i) => {
+      console.log(comment)
+      if (videoComments[i].comment !== null) {
+        return <p key={i}>{videoComments[i].comment}</p>
+      }
+    })
   }
 
   renderVideo() {
@@ -58,7 +72,7 @@ export class VideoCard extends Component {
     const { error } = this.context;
     const { userRating } = this.state;
     const { comments, rating, title, description, id } = this.props.video;
-
+    
     return (
       <main className='VideoCard'>
         <div className='video_rating'>

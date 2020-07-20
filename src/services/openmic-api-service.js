@@ -107,6 +107,7 @@ const OpenMicApiService = {
   },
 
   postComment(videoId, text) {
+
     return fetch(`${config.API_ENDPOINT}/interactions/comment`, {
       method: 'POST',
       headers: {
@@ -127,8 +128,9 @@ const OpenMicApiService = {
   },
 
   // need to find out what data type the rating is for this method?
-  postRating(videoId, notSureWhatGoesHere) {
-    return fetch(`${config.API_ENDPOINT}/interactions/${videoId}/rating`, {
+  postRating(videoId, rating) {
+    console.log(videoId)
+    return fetch(`${config.API_ENDPOINT}/interactions/rating`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -136,7 +138,8 @@ const OpenMicApiService = {
       },
       body: JSON.stringify({
         video_id: videoId,
-        notSureWhatGoesHere,
+        rating: rating,
+        comment: null,
       }),
     })
       .then(res =>

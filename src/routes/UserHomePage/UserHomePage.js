@@ -107,7 +107,8 @@ export class UserHomePage extends Component {
 
   render() {
     const { error } = this.context
-
+    console.log(error);
+    
     return (
       <>
         <nav className='user_nav'>
