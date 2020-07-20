@@ -17,7 +17,7 @@ class App extends Component {
   static getDerivedStateFromError(error) {
     return { hasError: true }
   }
-
+  
   render() {
     return (
       <div className='App'>

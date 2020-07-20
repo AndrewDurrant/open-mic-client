@@ -61,6 +61,8 @@ export class VideoListProvider extends Component {
   }
 
   addComment = (data) => {
+    console.log('context', data)
+
     const { comment, date_created, user } = data
     let updatedComment = {
       comment: comment,
@@ -70,6 +72,26 @@ export class VideoListProvider extends Component {
     let updatedVideoList = this.state.videoList.map(video => {
       if (video.id === data.media_id) {
         return {...video, comments: [...video.comments, updatedComment]} 
+      }
+      return video
+    })
+    this.setState({
+      videoList: updatedVideoList
+    })
+  }
+
+  addRating = (data) => {
+    console.log('context', data)
+
+    const { rating, date_created, user } = data
+    let newRating = {
+      rating: rating,
+      date_created: date_created,
+      user_id: user.id
+    };
+    let updatedVideoList = this.state.videoList.map(video => {
+      if (video.id === data.media_id) {
+        return {...video, ratings: [...video.ratings, newRating]} 
       }
       return video
     })
@@ -92,6 +114,7 @@ export class VideoListProvider extends Component {
       showBestRated: this.showBestRated,
       showMyVideos: this.showMyVideos,
       addComment: this.addComment,
+      addRating: this.addRating,
       addVideo: this.addVideo
     }
     return (
