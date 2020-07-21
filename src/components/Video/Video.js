@@ -13,6 +13,9 @@ export default class Video extends Component {
       // regex for vimeo
       const regex = /(vimeo.com)/gi;
       embedLink = video.link.replace(regex, 'player.vimeo.com/video')
+    } else if (video.link.includes('youtu.be')) {
+      const regex = /(youtu.be)/gi;
+      embedLink = video.link.replace(regex, 'www.youtube.com/embed')
     }
     
     return (
