@@ -12,15 +12,34 @@ export default class RegistrationPage extends Component {
     },
   }
 
-  handleRegistrationSuccess = () => {
-    const { history } = this.props
-    history.push('/login')
+  state = { 
+    registered: false,
   }
+
+  handleRegistrationSuccess = () => {
+    this.setState({ registered: true })
+    setTimeout(this.handleRedirect, 5000);
+  }
+  
+  handleRedirect = () => {
+    const { history } = this.props
+    history.push('/login');
+  }
+
+  displaySuccessRegistration = () => {
+    return (
+      <h2>Registration Successful!</h2>
+    )
+  }
+  
 
   render() {
     return (
       <Section className='RegistrationPage'>
-        <h2>Register</h2>
+        {this.state.registered ? 
+          this.displaySuccessRegistration() :
+          <h2>Register</h2>
+        }
         <RegistrationForm
           onRegistrationSuccess={this.handleRegistrationSuccess}
         />

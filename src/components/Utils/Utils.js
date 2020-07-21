@@ -1,10 +1,5 @@
 import React from 'react'
-// import { format as formatDate } from 'date-fns' ** see index.js for all of these
 import './Utils.css'
-
-// export function NiceDate({ date, format='Do MMMM YYYY' }) {
-//   return formatDate(date, format)
-// }
 
 export function AverageRating(num) {
   let  stars = [];
