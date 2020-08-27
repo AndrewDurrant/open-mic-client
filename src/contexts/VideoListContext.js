@@ -61,7 +61,6 @@ export class VideoListProvider extends Component {
   }
 
   addComment = (data) => {
-    console.log('context', data)
 
     const { comment, date_created, user } = data
     let updatedComment = {
@@ -81,7 +80,6 @@ export class VideoListProvider extends Component {
   }
 
   addRating = (data) => {
-    console.log('context', data)
 
     const { rating, date_created, user } = data
     let newRating = {
